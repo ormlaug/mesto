@@ -3,7 +3,7 @@
   margin: 30px 20px;
   width: 22px;
   height: 19px;
-  background: url(../../../images/like-ikon.svg);
+  background: transparent url(../../../images/like-ikon.svg) center no-repeat;
   cursor: pointer;
   border: none;
 }
