@@ -6,4 +6,9 @@
   background: transparent url(../../../images/like-ikon.svg) center no-repeat;
   cursor: pointer;
   border: none;
+  transition: opacity .5s ease-in;
+}
+
+.cards__like-button:hover {
+  opacity: .5;
 }
