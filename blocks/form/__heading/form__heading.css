@@ -1,6 +1,6 @@
-.popup__heading {
+.form__heading {
   margin: 0;
-  padding: 34px 36px 16px 36px;
+  padding: 34px 0 16px 0;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 900;
@@ -9,9 +9,9 @@
 }
 
 @media screen and (max-width: 525px) {
-  .popup__heading {
+  .form__heading {
     font-size: 18px;
     line-height: 22px;
-    padding: 25px 22px 45px 22px;
+    padding: 25px 0 45px 0;
   }
 }
