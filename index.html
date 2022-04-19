@@ -26,50 +26,26 @@
 
   <section class="cards">
     <ul class="cards__list">
-      <li class="cards__item">
-        <img src="./images/karachay-photo.jpg" alt="Замок в горах" class="cards__photo">
-        <h2 class="cards__title">Карачаевск</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
-
-      <li class="cards__item">
-        <img src="./images/elbrus-photo.jpg" alt="Эльбрус" class="cards__photo">
-        <h2 class="cards__title">Гора Эльбрус</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
-
-      <li class="cards__item">
-        <img src="./images/dombay-photo.jpg" alt="Домбай" class="cards__photo">
-        <h2 class="cards__title">Домбай</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
-
-      <li class="cards__item">
-        <img src="./images/dagestan-photo.jpg" alt="Дагестан" class="cards__photo">
-        <h2 class="cards__title">Дагестан</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
-
-      <li class="cards__item">
-        <img src="./images/novorossiysk-photo.jpg" alt="Новороссийск" class="cards__photo">
-        <h2 class="cards__title">Новороссийск</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
-
-      <li class="cards__item">
-        <img src="./images/pyatigorsk-photo.jpg" alt="Пятигорск" class="cards__photo">
-        <h2 class="cards__title">Пятигорск</h2>
-        <button type="button" class="cards__like-button" aria-label="like"></button>
-      </li>
     </ul>
   </section>
 
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
+
+  <template class="template">
+    <li class="cards__item">
+      <img class="cards__photo">
+      <button type="button" class="cards__delete-button" aria-label="delete"></button>
+      <div class="cards__info">
+        <h2 class="cards__title"></h2>
+        <button type="button" class="cards__like-button" aria-label="like"></button>
+      </div>
+    </li>
+  </template>
 </div>
 
-  <section class="popup">
+  <section class="popup popup_type_edit">
     <div class="popup__container">
       <button type="button" class="popup__close" aria-label="close"></button>
       <form class="form">
@@ -80,6 +56,27 @@
       </form>
     </div>
   </section>
+
+  <section class="popup popup_type_add">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="close"></button>
+      <form class="form">
+        <h2 class="form__heading">Новое место</h2>
+        <input type="text" class="form__item form__item_el_card-name" placeholder="Название" required>
+        <input type="text" class="form__item form__item_el_link" placeholder="Ссылка на картинку" required>
+        <button type="submit" class="form__save-button" aria-label="save">Создать</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup_type_picture">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="close"></button>
+      <img class="popup__image">
+      <p class="popup__subtitle"></p>
+    </div>
+  </section>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
