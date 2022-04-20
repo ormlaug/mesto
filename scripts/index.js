@@ -25,12 +25,22 @@ const initialCards = [
   }
 ];
 
-const cardContainer = document.querySelector('.cards__list');
+const editInfoButton = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup_type_edit');
+const popupCloseButton = popup.querySelector('.popup__close');
+
+const nameOriginal = document.querySelector('.profile__name');
+const jobOriginal = document.querySelector('.profile__text');
+const nameInput = popup.querySelector('.form__item_el_name');
+const jobInput = popup.querySelector('.form__item_el_text');
+const formPopup = popup.querySelector('.form');
+
+const cardList = document.querySelector('.cards__list');
 const template = document.querySelector('.template');
 
 function render() {
   const html = initialCards.map(getElement);
-  cardContainer.append(...html);
+  cardList.append(...html);
 }
 
 function getElement(item) {
@@ -41,18 +51,6 @@ function getElement(item) {
   cardPhoto.src = item.link;
   return getElementTemplate;
 }
-
-render();
-
-
-let editInfoButton = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup_type_edit');
-let popupCloseButton = popup.querySelector('.popup__close');
-let nameOriginal = document.querySelector('.profile__name');
-let jobOriginal = document.querySelector('.profile__text');
-let nameInput = popup.querySelector('.form__item_el_name');
-let jobInput = popup.querySelector('.form__item_el_text');
-let formPopup = popup.querySelector('.form');
 
 function togglePopup() {
   popup.classList.toggle('popup_active');
@@ -72,3 +70,5 @@ function formSaveHandler (evt) {
 editInfoButton.addEventListener('click', togglePopup);
 popupCloseButton.addEventListener('click', togglePopup);
 formPopup.addEventListener('submit', formSaveHandler);
+
+render();
