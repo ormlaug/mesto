@@ -1,33 +1,6 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-const editInfoButton = document.querySelector('.profile__edit-button');
+const infoEditButton = document.querySelector('.profile__edit-button');
 const popupCloseButtonEdit = document.querySelector('.popup__close');
-const addCardButton = document.querySelector('.profile__add-button');
+const cardAddButton = document.querySelector('.profile__add-button');
 
 const popupTypeAdd = document.querySelector('.popup_type_add');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
@@ -47,18 +20,19 @@ const cardList = document.querySelector('.cards__list');
 const template = document.querySelector('.template');
 const popupCloseButtonAdd = popupTypeAdd.querySelector('.popup__close');
 const popupCloseButtonPicture = popupTypePicture.querySelector('.popup__close');
+const popupPhoto = popupTypePicture.querySelector('.popup__image');
 
 function render() {
-  const html = initialCards.map(getElement);
-  cardList.append(...html);
+  const cards = initialCards.map(getElement);
+  cardList.append(...cards);
 }
 
 function getElement(item) {
-  const getElementTemplate = template.content.cloneNode(true);
-  const cardTitle = getElementTemplate.querySelector('.cards__title');
-  const cardPhoto = getElementTemplate.querySelector('.cards__photo');
-  const likeButton = getElementTemplate.querySelector('.cards__like-button');
-  const deleteButton = getElementTemplate.querySelector('.cards__delete-button');
+  const pageElementsTemplate = template.content.cloneNode(true);
+  const cardTitle = pageElementsTemplate.querySelector('.cards__title');
+  const cardPhoto = pageElementsTemplate.querySelector('.cards__photo');
+  const likeButton = pageElementsTemplate.querySelector('.cards__like-button');
+  const deleteButton = pageElementsTemplate.querySelector('.cards__delete-button');
 
   cardTitle.textContent = item.name;
   cardPhoto.src = item.link;
@@ -76,7 +50,7 @@ function getElement(item) {
 
   cardPhoto.addEventListener('click', openPopupTypePicture);
 
-  return getElementTemplate;
+  return pageElementsTemplate;
 }
 
 function openPopup(popup) {
@@ -87,28 +61,26 @@ function closePopup(popup) {
   popup.classList.remove('popup_active');
 }
 
-function openPopupTypePicture(evt) {
-  openPopup(popupTypePicture);
-  const listItem = evt.target.closest('.cards__item');
+function openPopupTypePicture(item) {
+  const listItem = item.target.closest('.cards__item');
   const cardTitle = listItem.querySelector('.cards__title');
   const cardPhoto = listItem.querySelector('.cards__photo');
-  const popupPhoto = popupTypePicture.querySelector('.popup__image');
   const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 
   popupSubtitle.textContent = cardTitle.textContent;
   popupPhoto.src = cardPhoto.src;
   popupPhoto.alt = cardPhoto.alt;
+
+  openPopup(popupTypePicture);
 }
 
-editInfoButton.addEventListener('click', function() {
-  if (!popupTypeEdit.classList.contains('popup_active')) {
-    nameInput.value = nameOriginal.textContent;
-    jobInput.value = jobOriginal.textContent;
-  }
+infoEditButton.addEventListener('click', function() {
+  nameInput.value = nameOriginal.textContent;
+  jobInput.value = jobOriginal.textContent;
   openPopup(popupTypeEdit);
 });
 
-addCardButton.addEventListener('click', function() {
+cardAddButton.addEventListener('click', function() {
   formCardName.value ='';
   formCardLink.value ='';
   openPopup(popupTypeAdd);

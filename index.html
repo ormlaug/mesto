@@ -32,6 +32,39 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
+</div>
+
+  <div class="popup popup_type_edit">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="close"></button>
+      <form class="form form_type_edit">
+        <h2 class="form__heading">Редактировать профиль</h2>
+        <input type="text" class="form__item form__item_el_name" placeholder="Имя" required>
+        <input type="text" class="form__item form__item_el_text" placeholder="О себе" required>
+        <button type="submit" class="form__save-button" aria-label="save">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <button type="button" class="popup__close" aria-label="close"></button>
+      <form class="form form_type_add">
+        <h2 class="form__heading">Новое место</h2>
+        <input type="text" class="form__item form__item_el_card-name" placeholder="Название" required>
+        <input type="text" class="form__item form__item_el_link" placeholder="Ссылка на картинку" required>
+        <button type="submit" class="form__save-button" aria-label="save">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_picture">
+    <div class="popup__container popup__container_for-picture">
+      <button type="button" class="popup__close" aria-label="close"></button>
+      <img class="popup__image">
+      <p class="popup__subtitle"></p>
+    </div>
+  </div>
 
   <template class="template">
     <li class="cards__item">
@@ -43,40 +76,8 @@
       </div>
     </li>
   </template>
-</div>
 
-  <section class="popup popup_type_edit">
-    <div class="popup__container">
-      <button type="button" class="popup__close" aria-label="close"></button>
-      <form class="form form_type_edit">
-        <h2 class="form__heading">Редактировать профиль</h2>
-        <input type="text" class="form__item form__item_el_name" placeholder="Имя" required>
-        <input type="text" class="form__item form__item_el_text" placeholder="О себе" required>
-        <button type="submit" class="form__save-button" aria-label="save">Сохранить</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="popup popup_type_add">
-    <div class="popup__container">
-      <button type="button" class="popup__close" aria-label="close"></button>
-      <form class="form form_type_add">
-        <h2 class="form__heading">Новое место</h2>
-        <input type="text" class="form__item form__item_el_card-name" placeholder="Название" required>
-        <input type="text" class="form__item form__item_el_link" placeholder="Ссылка на картинку" required>
-        <button type="submit" class="form__save-button" aria-label="save">Создать</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="popup popup_type_picture">
-    <div class="popup__container popup__container_for-picture">
-      <button type="button" class="popup__close" aria-label="close"></button>
-      <img class="popup__image">
-      <p class="popup__subtitle"></p>
-    </div>
-  </section>
-
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
