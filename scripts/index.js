@@ -21,6 +21,7 @@ const template = document.querySelector('.template');
 const popupCloseButtonAdd = popupTypeAdd.querySelector('.popup__close');
 const popupCloseButtonPicture = popupTypePicture.querySelector('.popup__close');
 const popupPhoto = popupTypePicture.querySelector('.popup__image');
+const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 
 function render() {
   const cards = initialCards.map(getElement);
@@ -48,7 +49,7 @@ function getElement(item) {
     likeButton.classList.toggle('cards__like-button_active');
   });
 
-  cardPhoto.addEventListener('click', openPopupTypePicture);
+  cardPhoto.addEventListener('click', () => openPopupTypePicture(item));
 
   return pageElementsTemplate;
 }
@@ -62,14 +63,9 @@ function closePopup(popup) {
 }
 
 function openPopupTypePicture(item) {
-  const listItem = item.target.closest('.cards__item');
-  const cardTitle = listItem.querySelector('.cards__title');
-  const cardPhoto = listItem.querySelector('.cards__photo');
-  const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
-
-  popupSubtitle.textContent = cardTitle.textContent;
-  popupPhoto.src = cardPhoto.src;
-  popupPhoto.alt = cardPhoto.alt;
+  popupSubtitle.textContent = item.name;
+  popupPhoto.src = item.link;
+  popupPhoto.alt = item.name;
 
   openPopup(popupTypePicture);
 }
