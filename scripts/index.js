@@ -56,10 +56,14 @@ function getElement(item) {
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
+  popup.addEventListener('click', clickOverlayToClosePopup);
+  document.addEventListener('keydown', tapEscToClosePopup);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_active');
+  popup.removeEventListener('click', clickOverlayToClosePopup);
+  document.removeEventListener('keydown', tapEscToClosePopup);
 }
 
 function openPopupTypePicture(item) {
@@ -99,6 +103,20 @@ function cardSaveHandler (evt) {
   cardList.prepend(newCard);
   closePopup(popupTypeAdd);
 };
+
+function clickOverlayToClosePopup (evt) {
+  const popupOpened = document.querySelector('.popup_active');
+  if (evt.target.classList.contains('popup')) {
+    closePopup(popupOpened);
+  }
+}
+
+function tapEscToClosePopup (evt) {
+  const popupOpened = document.querySelector('.popup_active');
+  if (evt.key === 'Escape' && popupOpened !==null) {
+    closePopup(popupOpened);
+  }
+}
 
 popupCloseButtonEdit.addEventListener('click', () => closePopup(popupTypeEdit));
 popupCloseButtonAdd.addEventListener('click', () => closePopup(popupTypeAdd));
