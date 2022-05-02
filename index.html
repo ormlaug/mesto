@@ -39,27 +39,32 @@
       <button type="button" class="popup__close" aria-label="close"></button>
       <form class="form form_type_edit">
         <h2 class="form__heading">Редактировать профиль</h2>
-        
-        <input
-        minlength="2"
-        maxlength="40"
-        id="name"
-        name="name-input"
-        type="text"
-        class="form__item form__item_el_name"
-        placeholder="Имя"
-        required>
-
-        <input
-        minlength="2"
-        maxlength="200"
-        id="about"
-        name="about-input"
-        type="text"
-        class="form__item form__item_el_text"
-        placeholder="О себе"
-        required>
-
+        <div class="form__container">
+          <input
+            minlength="2"
+            maxlength="40"
+            id="name"
+            name="name-input"
+            type="text"
+            class="form__item form__item_el_name"
+            placeholder="Имя"
+            required
+          >
+          <span class="form__error name-input-error"></span>
+        </div>
+        <div class="form__container">
+          <input
+            minlength="2"
+            maxlength="200"
+            id="about"
+            name="about-input"
+            type="text"
+            class="form__item form__item_el_text"
+            placeholder="О себе"
+            required
+          >
+          <span class="form__error about-input-error"></span>
+        </div>
         <button type="submit" class="form__save-button" aria-label="save">Сохранить</button>
       </form>
     </div>
@@ -70,26 +75,31 @@
       <button type="button" class="popup__close" aria-label="close"></button>
       <form class="form form_type_add">
         <h2 class="form__heading">Новое место</h2>
-
-        <input
-        minlength="2"
-        maxlength="30"
-        id="place"
-        name="place-input"
-        type="text"
-        class="form__item form__item_el_card-name"
-        placeholder="Название"
-        required>
-
-        <input
-        type="url"
-        id="link"
-        name="link-input"
-        type="text"
-        class="form__item form__item_el_link"
-        placeholder="Ссылка на картинку"
-        required>
-
+        <div class="form__container">
+          <input
+            minlength="2"
+            maxlength="30"
+            id="place"
+            name="place-input"
+            type="text"
+            class="form__item form__item_el_card-name"
+            placeholder="Название"
+            required
+          >
+          <span class="form__error place-input-error"></span>
+        </div>
+        <div class="form__container">
+          <input
+            type="url"
+            id="link"
+            name="link-input"
+            type="text"
+            class="form__item form__item_el_link"
+            placeholder="Ссылка на картинку"
+            required
+          >
+          <span class="form__error link-input-error"></span>
+        </div>
         <button type="submit" class="form__save-button" aria-label="save">Создать</button>
       </form>
     </div>
