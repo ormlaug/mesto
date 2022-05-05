@@ -11,12 +11,12 @@
   min-height: 30px;
   position: absolute;
   bottom: 0;
-  left:  36px;
+  left: 0;
 }
 
 @media screen and (max-width: 525px) {
   .form__error {
     bottom: 0;
-    left: 22px;
+    left: 0;
   }
 }

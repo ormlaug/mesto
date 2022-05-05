@@ -37,7 +37,7 @@
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button type="button" class="popup__close" aria-label="close"></button>
-      <form class="form form_type_edit">
+      <form class="form" novalidate>
         <h2 class="form__heading">Редактировать профиль</h2>
         <div class="form__container">
           <input
@@ -50,7 +50,7 @@
             placeholder="Имя"
             required
           >
-          <span class="form__error name-input-error"></span>
+          <span class="form__error" id="name-error"></span>
         </div>
         <div class="form__container">
           <input
@@ -63,7 +63,7 @@
             placeholder="О себе"
             required
           >
-          <span class="form__error about-input-error"></span>
+          <span class="form__error" id="about-error"></span>
         </div>
         <button type="submit" class="form__save-button" aria-label="save">Сохранить</button>
       </form>
@@ -73,7 +73,7 @@
   <div class="popup popup_type_add">
     <div class="popup__container">
       <button type="button" class="popup__close" aria-label="close"></button>
-      <form class="form form_type_add">
+      <form class="form" novalidate>
         <h2 class="form__heading">Новое место</h2>
         <div class="form__container">
           <input
@@ -86,7 +86,7 @@
             placeholder="Название"
             required
           >
-          <span class="form__error place-input-error"></span>
+          <span class="form__error" id="place-error"></span>
         </div>
         <div class="form__container">
           <input
@@ -98,7 +98,7 @@
             placeholder="Ссылка на картинку"
             required
           >
-          <span class="form__error link-input-error"></span>
+          <span class="form__error" id="link-error"></span>
         </div>
         <button type="submit" class="form__save-button" aria-label="save">Создать</button>
       </form>

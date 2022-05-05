@@ -46,4 +46,5 @@
 @import url(../blocks/form/__save-button/_disabled/form__save-button_disabled.css);
 @import url(../blocks/form/__item/_type/_error/form__item_type_error.css);
 @import url(../blocks/form/__error/form__error.css);
+@import url(../blocks/form/__error/_on/form__error_on.css);
 
