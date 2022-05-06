@@ -22,6 +22,7 @@ const popupCloseButtonAdd = popupTypeAdd.querySelector('.popup__close');
 const popupCloseButtonPicture = popupTypePicture.querySelector('.popup__close');
 const popupPhoto = popupTypePicture.querySelector('.popup__image');
 const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
+const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 
 function render() {
   const cards = initialCards.map(getElement);
@@ -83,6 +84,7 @@ infoEditButton.addEventListener('click', function() {
 cardAddButton.addEventListener('click', function() {
   formCardName.value ='';
   formCardLink.value ='';
+  disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
   openPopup(popupTypeAdd);
 });
 
@@ -112,9 +114,11 @@ function clickOverlayToClosePopup (evt) {
 }
 
 function tapEscToClosePopup (evt) {
-  const popupOpened = document.querySelector('.popup_active');
-  if (evt.key === 'Escape' && popupOpened !==null) {
-    closePopup(popupOpened);
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_active');
+    if (popupOpened !==null) {
+      closePopup(popupOpened);
+    }
   }
 }
 
