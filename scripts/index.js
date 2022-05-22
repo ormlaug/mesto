@@ -42,10 +42,10 @@ function closePopup(popup) {
   document.removeEventListener('keydown', tapEscToClosePopup);
 }
 
-function openPopupTypePicture(item) {
-  popupSubtitle.textContent = item.name;
-  popupPhoto.src = item.link;
-  popupPhoto.alt = item.name;
+function openPopupTypePicture(data) {
+  popupSubtitle.textContent = data.name;
+  popupPhoto.src = data.link;
+  popupPhoto.alt = data.name;
 
   openPopup(popupTypePicture);
 }
@@ -59,7 +59,7 @@ infoEditButton.addEventListener('click', function() {
 cardAddButton.addEventListener('click', function() {
   formCardName.value ='';
   formCardLink.value ='';
-  disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
+  // disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
   openPopup(popupTypeAdd);
 });
 
@@ -104,7 +104,7 @@ formEdit.addEventListener('submit', formSaveHandler);
 formAdd.addEventListener('submit', cardSaveHandler);
 
 initialCards.forEach((item) => {
-  const card = new Card(item);
+  const card = new Card(item, openPopupTypePicture);
   const cardElement = card.generateCard();
   cardList.append(cardElement);
 });
