@@ -1,3 +1,7 @@
+import { initialCards } from "./initial-cards.js";
+import { Card } from './Card.js';
+
+
 const infoEditButton = document.querySelector('.profile__edit-button');
 const popupCloseButtonEdit = document.querySelector('.popup__close');
 const cardAddButton = document.querySelector('.profile__add-button');
@@ -24,36 +28,7 @@ const popupPhoto = popupTypePicture.querySelector('.popup__image');
 const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 
-function render() {
-  const cards = initialCards.map(getElement);
-  cardList.append(...cards);
-}
 
-function getElement(item) {
-  const pageElementsTemplate = template.content.cloneNode(true);
-  const cardTitle = pageElementsTemplate.querySelector('.cards__title');
-  const cardPhoto = pageElementsTemplate.querySelector('.cards__photo');
-  const likeButton = pageElementsTemplate.querySelector('.cards__like-button');
-  const deleteButton = pageElementsTemplate.querySelector('.cards__delete-button');
-
-  cardTitle.textContent = item.name;
-  cardPhoto.src = item.link;
-  cardPhoto.alt = item.name;
-
-  deleteButton.addEventListener('click', function (evt) {
-    const listItem = evt.target.closest('.cards__item');
-    listItem.remove();
-  });
-
-  likeButton.addEventListener('click', function(evt) {
-    const like = evt.target.closest('.cards__like-button');
-    likeButton.classList.toggle('cards__like-button_active');
-  });
-
-  cardPhoto.addEventListener('click', () => openPopupTypePicture(item));
-
-  return pageElementsTemplate;
-}
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
@@ -128,4 +103,8 @@ popupCloseButtonPicture.addEventListener('click', () => closePopup(popupTypePict
 formEdit.addEventListener('submit', formSaveHandler);
 formAdd.addEventListener('submit', cardSaveHandler);
 
-render();
+initialCards.forEach((item) => {
+  const card = new Card(item);
+  const cardElement = card.generateCard();
+  cardList.append(cardElement);
+});
