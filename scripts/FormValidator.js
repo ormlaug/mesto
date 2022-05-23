@@ -37,21 +37,21 @@ export class FormValidator {
     });
   }
   
-  disableSubmitButton(buttonElement, inactiveButtonClass) {
+  disableSubmitButton = (buttonElement) => {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute('disabled', '');
   }
 
-  enableSubmitButton(buttonElement, inactiveButtonClass) {
+  _enableSubmitButton = (buttonElement) => {
     buttonElement.classList.remove(this._inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
   }
   
-  _toggleButtonState(buttonElement, inactiveButtonClass) {
+  _toggleButtonState(buttonElement) {
     if(this._hasInvalidInput()) {
-      this.disableSubmitButton(buttonElement, inactiveButtonClass);
+      this.disableSubmitButton(buttonElement);
     } else {
-      this.enableSubmitButton(buttonElement, inactiveButtonClass);
+      this.enableSubmitButton(buttonElement);
     }
   }
 
@@ -60,7 +60,7 @@ export class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(config, formElement, inputElement);
-        this._toggleButtonState(buttonElement, inactiveButtonClass);
+        this._toggleButtonState(buttonElement);
       });
     });
   }

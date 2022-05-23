@@ -30,10 +30,10 @@ const popupPhoto = popupTypePicture.querySelector('.popup__image');
 const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 
-const cardFormValidator = new FormValidator(config, popupTypeAdd);
-const profileFormValidator = new FormValidator(config, popupTypeEdit);
-cardFormValidator.enableValidation();
-profileFormValidator.enableValidation();
+const addFormValidator = new FormValidator(config, popupTypeAdd);
+const editFormValidator = new FormValidator(config, popupTypeEdit);
+addFormValidator.enableValidation();
+editFormValidator.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
@@ -64,7 +64,7 @@ infoEditButton.addEventListener('click', function() {
 cardAddButton.addEventListener('click', function() {
   formCardName.value ='';
   formCardLink.value ='';
-  cardFormValidator.disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
+  addFormValidator.disableSubmitButton(popupAddSubmitBtn);
   openPopup(popupTypeAdd);
 });
 
