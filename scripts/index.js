@@ -30,8 +30,8 @@ const popupPhoto = popupTypePicture.querySelector('.popup__image');
 const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 
-const cardFormValidator = new FormValidator(config, popupTypeEdit);
-const profileFormValidator = new FormValidator(config, popupTypeAdd);
+const cardFormValidator = new FormValidator(config, popupTypeAdd);
+const profileFormValidator = new FormValidator(config, popupTypeEdit);
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 
