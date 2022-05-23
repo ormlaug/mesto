@@ -1,5 +1,7 @@
 import { initialCards } from "./initial-cards.js";
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+import { config } from '../utils.js';
 
 
 const infoEditButton = document.querySelector('.profile__edit-button');
@@ -28,7 +30,10 @@ const popupPhoto = popupTypePicture.querySelector('.popup__image');
 const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
 const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 
-
+const cardFormValidator = new FormValidator(config, popupTypeEdit);
+const profileFormValidator = new FormValidator(config, popupTypeAdd);
+cardFormValidator.enableValidation();
+profileFormValidator.enableValidation();
 
 function openPopup(popup) {
   popup.classList.add('popup_active');
@@ -59,7 +64,7 @@ infoEditButton.addEventListener('click', function() {
 cardAddButton.addEventListener('click', function() {
   formCardName.value ='';
   formCardLink.value ='';
-  // disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
+  cardFormValidator.disableSubmitButton(config.inactiveButtonClass, popupAddSubmitBtn);
   openPopup(popupTypeAdd);
 });
 
