@@ -23,7 +23,7 @@ const formEdit = popupTypeEdit.querySelector('.form');
 const formAdd = popupTypeAdd.querySelector('.form');
 
 const cardList = document.querySelector('.cards__list');
-const template = document.querySelector('.template');
+const templateSelector = document.querySelector('.template');
 const popupCloseButtonAdd = popupTypeAdd.querySelector('.popup__close');
 const popupCloseButtonPicture = popupTypePicture.querySelector('.popup__close');
 const popupPhoto = popupTypePicture.querySelector('.popup__image');
@@ -47,10 +47,10 @@ function closePopup(popup) {
   document.removeEventListener('keydown', tapEscToClosePopup);
 }
 
-function openPopupTypePicture(data) {
-  popupSubtitle.textContent = data.name;
-  popupPhoto.src = data.link;
-  popupPhoto.alt = data.name;
+function openPopupTypePicture(item) {
+  popupSubtitle.textContent = item.name;
+  popupPhoto.src = item.link;
+  popupPhoto.alt = item.name;
 
   openPopup(popupTypePicture);
 }
@@ -68,28 +68,22 @@ cardAddButton.addEventListener('click', function() {
   openPopup(popupTypeAdd);
 });
 
-function formSaveHandler (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault();
   nameOriginal.textContent = nameInput.value;
   jobOriginal.textContent = jobInput.value;
   closePopup(popupTypeEdit);
 }
 
-function cardSaveHandler (evt) {
+function handleNewCardSubmit (evt) {
   evt.preventDefault();
-  const newCard = getElement(
-    {
-      name: formCardName.value, 
-      link: formCardLink.value
-    });
-  cardList.prepend(newCard);
+  cardList.prepend(createCard({name: formCardName.value, link: formCardLink.value}));
   closePopup(popupTypeAdd);
 };
 
 function clickOverlayToClosePopup (evt) {
-  const popupOpened = document.querySelector('.popup_active');
   if (evt.target.classList.contains('popup')) {
-    closePopup(popupOpened);
+    closePopup(evt.target);
   }
 }
 
@@ -102,14 +96,18 @@ function tapEscToClosePopup (evt) {
   }
 }
 
+function createCard(item) {
+  const card = new Card(item, '.template' ,openPopupTypePicture);
+  const cardElement = card.generateCard(); 
+  return cardElement;
+}
+
 popupCloseButtonEdit.addEventListener('click', () => closePopup(popupTypeEdit));
 popupCloseButtonAdd.addEventListener('click', () => closePopup(popupTypeAdd));
 popupCloseButtonPicture.addEventListener('click', () => closePopup(popupTypePicture));
-formEdit.addEventListener('submit', formSaveHandler);
-formAdd.addEventListener('submit', cardSaveHandler);
+formEdit.addEventListener('submit', handleProfileFormSubmit);
+formAdd.addEventListener('submit', handleNewCardSubmit);
 
 initialCards.forEach((item) => {
-  const card = new Card(item, openPopupTypePicture);
-  const cardElement = card.generateCard();
-  cardList.append(cardElement);
+  cardList.append(createCard(item));
 });

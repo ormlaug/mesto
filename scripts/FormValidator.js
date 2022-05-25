@@ -37,12 +37,12 @@ export class FormValidator {
     });
   }
   
-  disableSubmitButton = (buttonElement) => {
+  disableSubmitButton(buttonElement) {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute('disabled', '');
   }
 
-  _enableSubmitButton = (buttonElement) => {
+  _enableSubmitButton(buttonElement) {
     buttonElement.classList.remove(this._inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
   }
@@ -51,7 +51,7 @@ export class FormValidator {
     if(this._hasInvalidInput()) {
       this.disableSubmitButton(buttonElement);
     } else {
-      this.enableSubmitButton(buttonElement);
+      this._enableSubmitButton(buttonElement);
     }
   }
 
