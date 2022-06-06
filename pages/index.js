@@ -1,7 +1,10 @@
-import { initialCards } from "./initial-cards.js";
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { initialCards } from "../components/initial-cards.js";
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
 import { config } from '../utils.js';
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 
 const infoEditButton = document.querySelector('.profile__edit-button');
@@ -35,25 +38,8 @@ const editFormValidator = new FormValidator(config, popupTypeEdit);
 addFormValidator.enableValidation();
 editFormValidator.enableValidation();
 
-function openPopup(popup) {
-  popup.classList.add('popup_active');
-  popup.addEventListener('click', clickOverlayToClosePopup);
-  document.addEventListener('keydown', tapEscToClosePopup);
-}
 
-function closePopup(popup) {
-  popup.classList.remove('popup_active');
-  popup.removeEventListener('click', clickOverlayToClosePopup);
-  document.removeEventListener('keydown', tapEscToClosePopup);
-}
 
-function openPopupTypePicture(item) {
-  popupSubtitle.textContent = item.name;
-  popupPhoto.src = item.link;
-  popupPhoto.alt = item.name;
-
-  openPopup(popupTypePicture);
-}
 
 infoEditButton.addEventListener('click', function() {
   nameInput.value = nameOriginal.textContent;
@@ -81,20 +67,7 @@ function handleNewCardSubmit (evt) {
   closePopup(popupTypeAdd);
 };
 
-function clickOverlayToClosePopup (evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
-  }
-}
 
-function tapEscToClosePopup (evt) {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_active');
-    if (popupOpened !==null) {
-      closePopup(popupOpened);
-    }
-  }
-}
 
 function createCard(item) {
   const card = new Card(item, '.template' ,openPopupTypePicture);
