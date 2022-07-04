@@ -22,7 +22,7 @@ import {
   cardList,
 } from '../utils/utils.js';
 import { Section } from "../components/Section.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithForm, PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo, UserInfo } from "../components/UserInfo.js";
 
@@ -36,20 +36,20 @@ editFormValidator.enableValidation();
 const cardList = new Section({ 
   items: initialCards, 
   renderer: (item) => {
-      const card = createCard(item);
+      const cards = new Card(item, '.cards');
+      const card = cards.generateCard();
       cardList.addItem(card);
    }}, 
  '.cards__list');
 
-function createCard(item) {
-  const card = new Card(item, '.template', {handleCardClick: () => {
-    popupTypePicture.open(item)
-  }});
-  const cardElement = card.generateCard(); 
-  return cardElement;
-}
+cardList.renderer();
 
 const UserInfo = new UserInfo(
   nameSelector, jobSelector
 );
+
+const popupWithEditForm = new PopupWithForm('.popup_type_edit', )
+const PopupWithAddForm = new PopupWithForm('.popup_type_add', )
+
+
 
