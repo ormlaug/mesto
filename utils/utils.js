@@ -41,3 +41,8 @@ const popupCloseButtonAdd = popupTypeAdd.querySelector('.popup__close');
 const popupCloseButtonPicture = popupTypePicture.querySelector('.popup__close');
 const popupAddSubmitBtn = popupTypeAdd.querySelector('.form__save-button');
 const popupCloseButtonEdit = document.querySelector('.popup__close');
+
+export const cardsListSelector = 'cards__list';
+export const editPopupSelector = 'popup_type_edit';
+export const addPopupSelector = 'popup_type_add';
+export const picturePopupSelector = 'popup_type_picture';

@@ -4,9 +4,10 @@ import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import {
   config,
-  infoEditButton,
-  popupCloseButtonEdit,
-  cardAddButton,
+  cardsListSelector,
+  addPopupSelector,
+  editPopupSelector,
+
   popupTypeAdd,
   popupTypeEdit,
   popupTypePicture,
@@ -33,23 +34,31 @@ addFormValidator.enableValidation();
 editFormValidator.enableValidation();
 
 
+const createCard = (item) => {
+  const card = new Card({item}, cardSelector, openpopupTypePicture);
+  return card.generateCard();
+}
+
 const cardList = new Section({ 
   items: initialCards, 
-  renderer: (item) => {
-      const cards = new Card(item, '.cards');
-      const card = cards.generateCard();
-      cardList.addItem(card);
-   }}, 
- '.cards__list');
+  renderer: createCard,
+},
+cardsListSelector);
 
-cardList.renderer();
+const handleCardsSubmit = (item) => {
+  cardList.addItem(item);
+}
+
+const popupWithEditForm = new PopupWithForm(editPopupSelector, )
+const popupWithAddForm = new PopupWithForm(addPopupSelector, config, handleCardsSubmit);
+popupWithAddForm.setEventListeners();
 
 const UserInfo = new UserInfo(
   nameSelector, jobSelector
 );
 
-const popupWithEditForm = new PopupWithForm('.popup_type_edit', )
-const PopupWithAddForm = new PopupWithForm('.popup_type_add', )
+
+createCard.renderer();
 
 
 
