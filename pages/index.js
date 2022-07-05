@@ -1,64 +1,52 @@
-
+import { Section } from "../components/Section.js";
 import { initialCards } from "../components/initial-cards.js";
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import {
-  config,
-  cardsListSelector,
-  addPopupSelector,
-  editPopupSelector,
 
-  popupTypeAdd,
-  popupTypeEdit,
-  popupTypePicture,
-  nameOriginal,
-  jobOriginal,
-  nameInput,
-  jobInput ,
-  formEdit,
-  formAdd,
-  popupPhoto,
-  popupSubtitle,
-  popupAddSubmitBtn,
-  cardList,
 } from '../utils/utils.js';
-import { Section } from "../components/Section.js";
-import { PopupWithForm, PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
-import { UserInfo, UserInfo } from "../components/UserInfo.js";
+import { UserInfo } from "../components/UserInfo.js";
 
-
-const addFormValidator = new FormValidator(config, popupTypeAdd);
-const editFormValidator = new FormValidator(config, popupTypeEdit);
-addFormValidator.enableValidation();
-editFormValidator.enableValidation();
-
-
-const createCard = (item) => {
-  const card = new Card({item}, cardSelector, openpopupTypePicture);
-  return card.generateCard();
-}
 
 const cardList = new Section({ 
   items: initialCards, 
-  renderer: createCard,
+  renderer: (item) => {
+    const card = new Card(item, '.template', () => {console.log("cardClickHandler")});
+    return card.generateCard();
+  },
 },
-cardsListSelector);
+'.cards__list');
 
-const handleCardsSubmit = (item) => {
-  cardList.addItem(item);
-}
 
-const popupWithEditForm = new PopupWithForm(editPopupSelector, )
+const popupTypeAdd = new Popup('.popup_type_add');
+const popupTypeEdit = new Popup('.popup_type_edit');
+const popupTypePicture = new PopupWithImage('.popup_type_picture');
+
+
+const popupWithEditForm = new PopupWithForm(editPopupSelector, (item) => {
+  UserInfo.setUserInfo(item);
+  popupWithEditForm.close();
+});
+
 const popupWithAddForm = new PopupWithForm(addPopupSelector, config, handleCardsSubmit);
 popupWithAddForm.setEventListeners();
 
-const UserInfo = new UserInfo(
+const user = new UserInfo(
   nameSelector, jobSelector
 );
 
+const addFormValidator = new FormValidator(config, popupTypeAdd);
+const editFormValidator = new FormValidator(config, popupTypeEdit);
 
-createCard.renderer();
+popupWithAddForm.setEventListeners();
+popupWithEditForm.setEventListeners();
+
+addFormValidator.enableValidation();
+editFormValidator.enableValidation();
+
+cardList.renderItems();
 
 
 
