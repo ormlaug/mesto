@@ -7,13 +7,14 @@ export default class Section {
   }
 
   addItem(item) {
-    this._container.append(item);
+    this._renderItems.push(item);
+    this._renderedItems();
   }
   
   renderItems() {
-    this.clear();
     this._renderedItems.forEach(item => {
-      this._renderer(item);
+      const renderedItem = this._renderer(item);
+      this._container.append(renderedItem);
     });
   }
 }
