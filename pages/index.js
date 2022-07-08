@@ -20,7 +20,7 @@ const cardList = new Section({
 
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 
-const popupWithAddCardForm = new PopupWithForm('.popup_type_add', () => {console.log("handleASubmit");
+const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {cardList.addItem(item);
   popupWithAddCardForm.close();
 });
 
@@ -34,7 +34,7 @@ cardAddButton.addEventListener('click', function() {
 
 infoEditButton.addEventListener('click', function() {
   popupWithEditInfoForm.open();
-})
+});
 
 popupWithPicture.setEventListeners();
 popupWithAddCardForm.setEventListeners();
