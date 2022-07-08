@@ -3,9 +3,12 @@ import { initialCards } from "../components/initial-cards.js";
 import Card from "../components/Card.js";
 import popupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 import { 
   cardAddButton,
   infoEditButton,
+  nameInput,
+  jobInput
  } from '../utils/utils.js';
 
 
@@ -24,7 +27,10 @@ const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {car
   popupWithAddCardForm.close();
 });
 
-const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', () => {console.log("handleESubmit")
+const userID = new UserInfo('.profile__name', '.profile__text');
+
+const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
+  console.log(userID.setUserInfo(item));
   popupWithEditInfoForm.close();
 });
 
@@ -33,6 +39,9 @@ cardAddButton.addEventListener('click', function() {
 });
 
 infoEditButton.addEventListener('click', function() {
+  const userData = userID.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.job;
   popupWithEditInfoForm.open();
 });
 
