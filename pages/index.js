@@ -23,14 +23,15 @@ const cardList = new Section({
 
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 
-const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {cardList.addItem(item);
+const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
+  cardList.addItem(console.log(item));
   popupWithAddCardForm.close();
 });
 
 const userID = new UserInfo('.profile__name', '.profile__text');
 
 const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
-  console.log(userID.setUserInfo(item));
+  userID.setUserInfo(item);
   popupWithEditInfoForm.close();
 });
 

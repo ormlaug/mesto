@@ -24,8 +24,7 @@ export const popupList = Array.from(document.querySelectorAll('.popup'));
 export const formCardName = document.querySelector('.form__item_el_card-name');
 export const formCardLink = document.querySelector('.form__item_el_link');
 
-export const nameOriginal = document.querySelector('.profile__name');
-export const jobOriginal = document.querySelector('.profile__text');
+
 export const nameInput = document.querySelector('.form__item_el_name');
 export const jobInput = document.querySelector('.form__item_el_text');
 export const formEdit = popupTypeEdit.querySelector('.form');

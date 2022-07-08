@@ -7,7 +7,7 @@ export default class Section {
   }
 
   addItem(item) {
-    this._renderItems.push(item);
+    this._renderedItems.push(item);
     this._renderedItems();
   }
   
