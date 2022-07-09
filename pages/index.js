@@ -8,8 +8,10 @@ import {
   cardAddButton,
   infoEditButton,
   nameInput,
-  jobInput
+  jobInput,
+  config
  } from '../utils/utils.js';
+ import { FormValidator } from "../components/FormValidator.js";
 
 
 const cardList = new Section({ 
@@ -24,7 +26,7 @@ const cardList = new Section({
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 
 const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
-  cardList.addItem(console.log(item));
+  cardList.addItem(item);
   popupWithAddCardForm.close();
 });
 
@@ -49,6 +51,9 @@ infoEditButton.addEventListener('click', function() {
 popupWithPicture.setEventListeners();
 popupWithAddCardForm.setEventListeners();
 popupWithEditInfoForm.setEventListeners();
+
+const cardFormValidator = new FormValidator(config,'.popup_type_add');
+cardFormValidator.enableValidation();
 
 cardList.renderItems();
 

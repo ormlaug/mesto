@@ -14,9 +14,7 @@ export default class UserInfo {
     }
   
     setUserInfo(item) {
-      const newName = document.querySelector('.form__item_el_name');
-      const newJob = document.querySelector('.form__item_el_text');
-      this._name.textContent = newName.value;
-      this._job.textContent = newJob.value;
+      this._name.textContent = item['name-input'];
+      this._job.textContent = item['about-input'];
     }
   }
