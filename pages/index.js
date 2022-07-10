@@ -55,6 +55,9 @@ popupWithEditInfoForm.setEventListeners();
 const cardFormValidator = new FormValidator(config,'.popup_type_add');
 cardFormValidator.enableValidation();
 
+const infoFormValidator = new FormValidator(config, '.popup_type_edit');
+infoFormValidator.enableValidation();
+
 cardList.renderItems();
 
 
