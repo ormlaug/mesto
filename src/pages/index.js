@@ -1,18 +1,18 @@
 import '../pages/index.css';
 
 import Section from "../components/Section.js";
-import { initialCards } from "../components/initial-cards.js";
 import Card from "../components/Card.js";
 import popupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
+  initialCards,
   cardAddButton,
   infoEditButton,
   nameInput,
   jobInput,
   config
- } from '../utils/utils.js';
+ } from '../utils/constants.js';
  import { FormValidator } from "../components/FormValidator.js";
 
  const cardFormValidator = new FormValidator(config,'.popup_type_add');
@@ -21,11 +21,16 @@ cardFormValidator.enableValidation();
 const infoFormValidator = new FormValidator(config, '.popup_type_edit');
 infoFormValidator.enableValidation();
 
+function createCard(item) {
+  const card = new Card(item, '.template', () => popupWithPicture.open({name: item.name, link: item.link}));
+  return card.generateCard(item);
+}
+
 const cardList = new Section({ 
   items: initialCards, 
   renderer: (item) => {
-    const card = new Card(item, '.template', () => popupWithPicture.open({name: item.name, link: item.link}));
-    return card.generateCard();
+    const card = createCard(item);
+    cardList.addItem(card);
   },
 },
 '.cards__list');
@@ -37,10 +42,10 @@ const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
   popupWithAddCardForm.close();
 });
 
-const userID = new UserInfo('.profile__name', '.profile__text');
+const user = new UserInfo({ name: '.profile__name', about: '.profile__text'});
 
 const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
-  userID.setUserInfo(item);
+  user.setUserInfo(item);
   popupWithEditInfoForm.close();
 });
 
@@ -49,9 +54,9 @@ cardAddButton.addEventListener('click', function() {
 });
 
 infoEditButton.addEventListener('click', function() {
-  const userData = userID.getUserInfo();
+  const userData = user.getUserInfo();
   nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  jobInput.value = userData.about;
   popupWithEditInfoForm.open();
 });
 

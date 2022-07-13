@@ -6,15 +6,11 @@ export default class Section {
   }
 
   addItem(item) {
-    this._renderedItems.unshift({name: item['place-input'], link: item['link-input']});
-    this.renderItems();
-  }
+    this._container.prepend(item)
+    }
   
   renderItems() {
-    this._container.replaceChildren();
     this._renderedItems.forEach((item) => {
-      const renderedItem = this._renderer(item);
-      this._container.append(renderedItem);
-    });
+      this._renderer(item)});
   }
 }
