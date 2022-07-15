@@ -1,4 +1,4 @@
-import '../pages/index.css';
+//import '../pages/index.css';
 
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -50,6 +50,7 @@ const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
 });
 
 cardAddButton.addEventListener('click', function() {
+  cardFormValidator.disableSubmitButton(cardAddButton);
   popupWithAddCardForm.open();
 });
 
