@@ -11,14 +11,16 @@ import {
   infoEditButton,
   nameInput,
   jobInput,
-  config
+  config,
+  popupTypeAdd,
+  popupTypeEdit
  } from '../utils/constants.js';
  import { FormValidator } from "../components/FormValidator.js";
 
- const cardFormValidator = new FormValidator(config,'.popup_type_add');
+const cardFormValidator = new FormValidator(config, popupTypeAdd);
 cardFormValidator.enableValidation();
 
-const infoFormValidator = new FormValidator(config, '.popup_type_edit');
+const infoFormValidator = new FormValidator(config, popupTypeEdit);
 infoFormValidator.enableValidation();
 
 function createCard(item) {
