@@ -41,6 +41,8 @@ export const cardAddButton = document.querySelector('.profile__add-button');
 //попапы//
 export const popupTypeAdd = document.querySelector('.popup_type_add');
 export const popupTypeEdit = document.querySelector('.popup_type_edit');
+
+
 export const popupTypePicture = document.querySelector('.popup_type_picture');
 export const popupPhoto = popupTypePicture.querySelector('.popup__image');
 export const popupSubtitle = popupTypePicture.querySelector('.popup__subtitle');
