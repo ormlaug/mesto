@@ -40,7 +40,7 @@ const cardList = new Section({
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 
 const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
-  cardList.addItem(item);
+  cardList.addItem(createCard({name: item.place, link: item.link}));
   popupWithAddCardForm.close();
 });
 
