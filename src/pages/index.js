@@ -52,8 +52,8 @@ const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
 });
 
 cardAddButton.addEventListener('click', function() {
-  cardFormValidator.disableSubmitButton(cardAddButton);
   popupWithAddCardForm.open();
+  cardFormValidator.disableSubmitButton(config.submitButtonSelector);
 });
 
 infoEditButton.addEventListener('click', function() {

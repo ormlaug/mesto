@@ -37,7 +37,8 @@ export class FormValidator {
     });
   }
   
-  disableSubmitButton(buttonElement) {
+  disableSubmitButton() {
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute('disabled', '');
   }
