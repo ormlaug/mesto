@@ -16,6 +16,15 @@ import {
   popupTypeEdit
  } from '../utils/constants.js';
  import { FormValidator } from "../components/FormValidator.js";
+ import Api from '../components/Api.js';
+
+ const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45',
+  headers: {
+    authorization: '365d1fcf-c146-4ff9-b926-f9497a7fa8e2',
+    'Content-Type': 'application/json'
+  }
+});
 
 const cardFormValidator = new FormValidator(config, popupTypeAdd);
 cardFormValidator.enableValidation();
