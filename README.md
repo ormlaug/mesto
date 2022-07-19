@@ -23,4 +23,4 @@
 * Размещение на GitHub Pages
 
 ## Ссылка на GitHub Pages
-пока не доступна
+https://ormlaug.github.io/mesto
