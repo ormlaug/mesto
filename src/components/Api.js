@@ -23,8 +23,8 @@ export default class Api {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          name: data.name;
-          about = data.about;
+          name: data.name,
+          about: data.about
         })
       })
       .then(res => {
