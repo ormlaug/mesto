@@ -13,24 +13,22 @@ import {
   jobInput,
   config,
   popupTypeAdd,
-  popupTypeEdit
- } from '../utils/constants.js';
- import { FormValidator } from "../components/FormValidator.js";
- import Api from '../components/Api.js';
+  popupTypeEdit,
+  popupTypeAvatar
+} from '../utils/constants.js';
+import { FormValidator } from "../components/FormValidator.js";
+import Api from '../components/Api.js';
 
- const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45',
-  headers: {
-    authorization: '365d1fcf-c146-4ff9-b926-f9497a7fa8e2',
-    'Content-Type': 'application/json'
-  }
-});
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-45');
 
+//валидация всех инпутов
 const cardFormValidator = new FormValidator(config, popupTypeAdd);
 cardFormValidator.enableValidation();
-
 const infoFormValidator = new FormValidator(config, popupTypeEdit);
 infoFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(config, popupTypeAvatar);
+avatarFormValidator.enableValidation();
+
 
 function createCard(item) {
   const card = new Card(item, '.template', () => popupWithPicture.open({name: item.name, link: item.link}));
@@ -46,6 +44,14 @@ const cardList = new Section({
 },
 '.cards__list');
 
+api.getInitialCards()
+  .then(data => {
+    console.log(data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 
 const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
@@ -54,6 +60,15 @@ const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
 });
 
 const user = new UserInfo({ name: '.profile__name', about: '.profile__text'});
+
+api.getUserInfo()
+  .then(data => {
+    user.setUserInfo({name: data.name, about: data.about});
+    user.setAvatar(data.avatar)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
 const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
   user.setUserInfo(item);
