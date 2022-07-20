@@ -19,6 +19,8 @@ import {
 import { FormValidator } from "../components/FormValidator.js";
 import Api from '../components/Api.js';
 
+let userId = null;
+
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-45');
 
 //валидация всех инпутов
@@ -31,12 +33,19 @@ avatarFormValidator.enableValidation();
 
 
 function createCard(item) {
-  const card = new Card(item, '.template', () => popupWithPicture.open({name: item.name, link: item.link}));
+  const card = new Card(
+    item,
+    '.template',
+    () => popupWithPicture.open({name: item.name, link: item.link}),
+    userId,
+    handleLikeButton,
+    handleDeleteButton);
   return card.generateCard(item);
 }
 
+//здесь начать расписывать handleLikeButton и handleDeleteButton
+
 const cardList = new Section({ 
-  items: initialCards, 
   renderer: (item) => {
     const card = createCard(item);
     cardList.addItem(card);
@@ -46,7 +55,7 @@ const cardList = new Section({
 
 api.getInitialCards()
   .then(data => {
-    console.log(data)
+    cardList.renderItems(data);
   })
   .catch(err => {
     console.log(err)
