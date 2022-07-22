@@ -86,7 +86,7 @@ const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
   popupWithAddCardForm.close();
 });
 
-const user = new UserInfo({ name: '.profile__name', about: '.profile__text'});
+const user = new UserInfo({ name: '.profile__name', about: '.profile__text', avatar: '.profile__avatar'});
 
 api.getUserInfo()
   .then(data => {
