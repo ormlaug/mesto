@@ -14,7 +14,8 @@ import {
   config,
   popupTypeAdd,
   popupTypeEdit,
-  popupTypeAvatar
+  popupTypeAvatar,
+  popupTypeDelete
 } from '../utils/constants.js';
 import { FormValidator } from "../components/FormValidator.js";
 import Api from '../components/Api.js';
@@ -44,6 +45,23 @@ function createCard(item) {
 }
 
 //здесь начать расписывать handleLikeButton и handleDeleteButton
+function handleLikeButton(card) {
+  api.handleLikeButton()
+    .then(res => card.handleLikeButton(res))
+    .catch((err) => console.log(err))
+}
+
+function handleDeleteButton(card) {
+  popupTypeDelete.open();
+  popupTypeDelete.setSubmitAction(() => {
+    api.deleteCard(card)
+      .then(() => {
+        card.deleteCard();
+        popupTypeDelete.close();
+      })
+      .catch((err) => console.log(err))
+  })
+}
 
 const cardList = new Section({ 
   renderer: (item) => {
@@ -54,8 +72,8 @@ const cardList = new Section({
 '.cards__list');
 
 api.getInitialCards()
-  .then(data => {
-    cardList.renderItems(data);
+  .then(res => {
+    cardList.renderItems(res);
   })
   .catch(err => {
     console.log(err)
