@@ -40,14 +40,17 @@ function createCard(item) {
     () => popupWithPicture.open({name: item.name, link: item.link}),
     userId,
     handleLikeButton,
+
     handleDeleteButton);
   return card.generateCard(item);
 }
 
 //здесь начать расписывать handleLikeButton и handleDeleteButton
 function handleLikeButton(card) {
-  api.handleLikeButton()
-    .then(res => card.handleLikeButton(res))
+  api.handleLikeButton(card)
+    .then(res => {
+      //card.handleLikeButton(res)
+    })
     .catch((err) => console.log(err))
 }
 
@@ -73,6 +76,7 @@ const cardList = new Section({
 
 api.getInitialCards()
   .then(res => {
+    console.log(res)
     cardList.renderItems(res);
   })
   .catch(err => {

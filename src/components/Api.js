@@ -62,5 +62,18 @@ export default class Api {
       })
     }
 
+    handleLikeButton(item) {
+      return fetch(`${this._url}/cards/${item._id}/likes`, {
+        method: 'PUT',
+        headers: this._headers,
+      })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
+      });
+    }
+
 
   }
