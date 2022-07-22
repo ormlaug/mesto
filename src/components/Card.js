@@ -1,9 +1,9 @@
 export default class Card {
   constructor (
     data,
-    myId,
     templateSelector,
     handleCardClick,
+    myId,
     handleLikeButton,
     handleDeleteButton
     ) {

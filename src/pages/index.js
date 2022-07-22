@@ -118,7 +118,7 @@ popupWithPicture.setEventListeners();
 popupWithAddCardForm.setEventListeners();
 popupWithEditInfoForm.setEventListeners();
 
-cardList.renderItems();
+//cardList.renderItems();
 
 
 
