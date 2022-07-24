@@ -4,6 +4,7 @@ import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import popupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
   initialCards,
@@ -37,33 +38,32 @@ function createCard(item) {
   const card = new Card(
     item,
     '.template',
-    () => popupWithPicture.open({name: item.name, link: item.link}),
     userId,
-    handleLikeButton,
-
-    handleDeleteButton);
-  return card.generateCard(item);
-}
-
-//здесь начать расписывать handleLikeButton и handleDeleteButton
-function handleLikeButton(card) {
-  api.handleLikeButton(card)
-    .then(res => {
-      //card.handleLikeButton(res)
-    })
-    .catch((err) => console.log(err))
-}
-
-function handleDeleteButton(card) {
-  popupTypeDelete.open();
-  popupTypeDelete.setSubmitAction(() => {
-    api.deleteCard(card)
-      .then(() => {
-        card.deleteCard();
-        popupTypeDelete.close();
+    () => popupWithPicture.open({name: item.name, link: item.link}),
+    {handleLikeButton: (data) => {
+      api.likeCard(data)
+        .then((res) => card.likeCard(res))
+        .catch((err) => console.log(err));
+    },
+    handleRemoveLike: (data) => {
+      api.removeLike(data)
+        .then((res) => card.removeLike(res))
+        .catch((err) => console.log(err));
+    },
+    handleDeleteButton: (card) => {
+      popupTypeDelete.open();
+      popupTypeDelete.setSubmitAction(() => {
+        api.deleteCard(card)
+          .then(() => {
+            card.deleteCard();
+            popupTypeDelete.close();
+          })
+          .catch((err) => console.log(err))
       })
-      .catch((err) => console.log(err))
-  })
+    }}
+    );
+
+  return card.generateCard(item);
 }
 
 const cardList = new Section({ 
@@ -79,16 +79,24 @@ api.getInitialCards()
     console.log(res)
     cardList.renderItems(res);
   })
-  .catch(err => {
-    console.log(err)
-  })
+  .catch((err) => console.log(err))
 
 const popupWithPicture = new popupWithImage('.popup_type_picture');
+const popupWithDeleteCardHandler = new PopupWithConfirm('.popup_type_delete');
+
 
 const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
-  cardList.addItem(createCard({name: item.place, link: item.link}));
-  popupWithAddCardForm.close();
-});
+    popupWithAddCardForm.displayLoading(true, 'Создать', 'Cохранение...')
+    api.addNewCard(item)
+      .then((res) => {
+        popupWithAddCardForm.close();
+        return cardList.addItem(createCard(res));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupWithAddCardForm.displayLoading(false, 'Создать', 'Cохранение...')
+      })
+  });
 
 const user = new UserInfo({ name: '.profile__name', about: '.profile__text', avatar: '.profile__avatar'});
 
@@ -97,13 +105,19 @@ api.getUserInfo()
     user.setUserInfo({name: data.name, about: data.about});
     user.setAvatar(data.avatar)
   })
-  .catch(err => {
-    console.log(err)
-  })
+  .catch((err) => console.log(err))
 
 const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
-  user.setUserInfo(item);
-  popupWithEditInfoForm.close();
+  popupWithEditInfoForm.displayLoading(true, 'Сохранить', 'Сохранение')
+  api.setUserInfo(data)
+    .then(() => {
+      popupWithEditInfoForm.close();
+      return user.setUserInfo(data);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupWithEditInfoForm.displayLoading(false, 'Сохранить', 'Сохранение')
+    })
 });
 
 cardAddButton.addEventListener('click', function() {
@@ -121,6 +135,7 @@ infoEditButton.addEventListener('click', function() {
 popupWithPicture.setEventListeners();
 popupWithAddCardForm.setEventListeners();
 popupWithEditInfoForm.setEventListeners();
+popupWithDeleteCardHandler.setEventListeners();
 
 //cardList.renderItems();
 

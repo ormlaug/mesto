@@ -1,12 +1,14 @@
+import { data } from "autoprefixer";
+
 export default class Card {
   constructor (
     data,
     templateSelector,
     myId,
     handleCardClick,
-    handleLikeButton,
+    {handleLikeButton,
     handleRemoveLike,
-    handleDeleteButton
+    handleDeleteButton}
     ) {
     this._data = data;
     this._name = data.name;
@@ -70,6 +72,7 @@ export default class Card {
 
 
     this._setCardsOwner();
+    this._returnNewLikesNumber(this._data);
     this._setEventListeners();
 
     return this._element;
