@@ -20,7 +20,7 @@ export default class Card {
     this._handleDeleteButton = handleDeleteButton;
   }
 
-  _getTemplate = () => {
+  _getTemplate() {
     return document
     .querySelector(this._templateSelector)
     .content.querySelector('.cards__item')
