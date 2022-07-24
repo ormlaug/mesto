@@ -54,8 +54,16 @@ export default class Card {
     this._returnNewLikesNumber(data);
   }
 
-  isLiked() {
+  _isLiked() {
     return this._data.likes.some((item) => item._id === this._myId);
+  }
+
+  _toggleLikes() {
+    if(!this._isLiked()) {
+      this._handleLikeButton(this._data);
+    } else {
+      this._handleRemoveLike(this._data);
+    }
   }
 
   generateCard() {
@@ -86,8 +94,7 @@ export default class Card {
     });
 
     this.likeButton.addEventListener('click', () => {
-      console.log(this._data)
-      this._handleLikeButton(this._data);
+      this._toggleLikes();
     });
 
     this._cardPhoto.addEventListener('click', () => this._handleCardClick(this._data));

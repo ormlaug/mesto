@@ -52,12 +52,12 @@ function createCard(item) {
         .catch((err) => console.log(err));
     },
     handleDeleteButton: (card) => {
-      popupTypeDelete.open();
-      popupTypeDelete.setSubmitAction(() => {
+      popupWithDeleteCardHandler.open();
+      popupWithDeleteCardHandler.setSubmitAction(() => {
         api.deleteCard(card)
           .then((res) => {
             card.deleteCard(res);
-            popupTypeDelete.close();
+            popupWithDeleteCardHandler.close();
           })
           .catch((err) => console.log(err))
       })
@@ -102,7 +102,7 @@ const popupWithAddCardForm = new PopupWithForm('.popup_type_add', (item) => {
 const user = new UserInfo({ name: '.profile__name', about: '.profile__text', avatar: '.profile__avatar'});
 
 api.getUserInfo()
-  .then(data => {
+  .then((data) => {
     user.setUserInfo({name: data.name, about: data.about, avatar: data.avatar});
   })
   .catch((err) => console.log(err))
@@ -122,9 +122,9 @@ const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (data) => {
 
 const popupWithEditAvatarForm = new PopupWithForm('.popup_type_avatar', (data) => {
   popupWithEditAvatarForm.displayLoading(true, 'Сохранить', 'Cохранение...')
-  api.editAvatar(link)
+  api.editAvatar(data)
     .then((res) => {
-      user.setUserAvatar(res);
+      user.setUserInfo(res);
       popupWithEditAvatarForm.close();
     })
     .catch((err) => console.log(err))
