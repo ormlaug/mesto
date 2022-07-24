@@ -16,7 +16,8 @@ import {
   popupTypeAdd,
   popupTypeEdit,
   popupTypeAvatar,
-  popupTypeDelete
+  popupTypeDelete,
+  avatarEditButton
 } from '../utils/constants.js';
 import { FormValidator } from "../components/FormValidator.js";
 import Api from '../components/Api.js';
@@ -54,8 +55,8 @@ function createCard(item) {
       popupTypeDelete.open();
       popupTypeDelete.setSubmitAction(() => {
         api.deleteCard(card)
-          .then(() => {
-            card.deleteCard();
+          .then((res) => {
+            card.deleteCard(res);
             popupTypeDelete.close();
           })
           .catch((err) => console.log(err))
@@ -102,23 +103,35 @@ const user = new UserInfo({ name: '.profile__name', about: '.profile__text', ava
 
 api.getUserInfo()
   .then(data => {
-    user.setUserInfo({name: data.name, about: data.about});
-    user.setAvatar(data.avatar)
+    user.setUserInfo({name: data.name, about: data.about, avatar: data.avatar});
   })
   .catch((err) => console.log(err))
 
-const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (item) => {
-  popupWithEditInfoForm.displayLoading(true, 'Сохранить', 'Сохранение')
+const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (data) => {
+  popupWithEditInfoForm.displayLoading(true, 'Сохранить', 'Сохранение...')
   api.setUserInfo(data)
-    .then(() => {
+    .then((res) => {
+      user.setUserInfo(res);
       popupWithEditInfoForm.close();
-      return user.setUserInfo(data);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      popupWithEditInfoForm.displayLoading(false, 'Сохранить', 'Сохранение')
+      popupWithEditInfoForm.displayLoading(false, 'Сохранить', 'Сохранение...')
     })
 });
+
+const popupWithEditAvatarForm = new PopupWithForm('.popup_type_avatar', (data) => {
+  popupWithEditAvatarForm.displayLoading(true, 'Сохранить', 'Cохранение...')
+  api.editAvatar(data)
+    .then((res) => {
+      user.setUserInfo(res);
+      popupWithEditAvatarForm.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupWithEditAvatarForm.displayLoading(false, 'Сохранить', 'Сохранение...')
+    })
+})
 
 cardAddButton.addEventListener('click', function() {
   popupWithAddCardForm.open();
@@ -132,12 +145,24 @@ infoEditButton.addEventListener('click', function() {
   popupWithEditInfoForm.open();
 });
 
+avatarEditButton.addEventListener('cklick', function() {
+  popupWithEditAvatarForm.open();
+  avatarFormValidator.disableSubmitButton(config.submitButtonSelector);
+})
+
 popupWithPicture.setEventListeners();
 popupWithAddCardForm.setEventListeners();
 popupWithEditInfoForm.setEventListeners();
 popupWithDeleteCardHandler.setEventListeners();
+popupWithEditAvatarForm.setEventListeners();
 
-//cardList.renderItems();
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    user.setUserInfo(userData);
+    cardList.renderItems(cards);
+  })
+  .catch((err) => console.log(err));
 
 
 

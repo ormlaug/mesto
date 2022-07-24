@@ -37,6 +37,7 @@ export const config = {
 //кнопки//
 export const infoEditButton = document.querySelector('.profile__edit-button');
 export const cardAddButton = document.querySelector('.profile__add-button');
+export const avatarEditButton = document.querySelector('.profile__avatar');
 
 //попапы//
 export const popupTypeAdd = document.querySelector('.popup_type_add');
