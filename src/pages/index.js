@@ -7,7 +7,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import { 
-  initialCards,
   cardAddButton,
   infoEditButton,
   nameInput,
@@ -74,13 +73,6 @@ const cardList = new Section({
   },
 },
 '.cards__list');
-
-api.getInitialCards()
-  .then(res => {
-    console.log(res)
-    cardList.renderItems(res);
-  })
-  .catch((err) => console.log(err))
 
 const popupWithPicture = new popupWithImage('.popup_type_picture');
 const popupWithDeleteCardHandler = new PopupWithConfirm('.popup_type_delete');
