@@ -6,18 +6,21 @@ export default class Api {
           'Content-Type': 'application/json'
       };
     }
+
+    _returnResOK(res) {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
+      }
+    }
   
     getInitialCards() {
       return fetch(`${this._url}/cards`, {
         method: 'GET',
         headers: this._headers
       })
-      .then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
-      });
+      .then(this._returnResOK);
     }
   
     // другие методы работы с API
@@ -30,12 +33,7 @@ export default class Api {
           about: data.about
         })
       })
-      .then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
-      })
+      .then(this._returnResOK)
     }
 
     getUserInfo() {
@@ -43,37 +41,56 @@ export default class Api {
         method: 'GET',
         headers: this._headers
       })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
-        });
+        .then(this._returnResOK);
     }
 
-    addNewCard(item) {
+    //cards
+
+    addNewCard(data) {
       return fetch(`${this._url}/cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-          name: item.name,
-          link: item.link
+          name: data.name,
+          link: data.link
         })
       })
+        .then(this._returnResOK);
     }
 
-    handleLikeButton(item) {
-      return fetch(`${this._url}/cards/${item._id}/likes`, {
+    likeCard(data) {
+      return fetch(`${this._url}/cards/${data._id}/likes`, {
         method: 'PUT',
         headers: this._headers,
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Вот незадача, ошибка: ${res.status}`);
-      });
+      .then(this._returnResOK);
     }
 
+    removeLike(data) {
+      return fetch(`${this._url}/cards/${data._id}/likes`, {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+        .then(this._returnResOK);
+    }
+
+    deleteCard(data) {
+      return fetch(`${this._url}/cards/${data._data._id}`, {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+        .then(this._returnResOK);
+    }
+
+    editAvatar(data) {
+      return fetch(`${this._url}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: data.avatar,
+        })
+      })
+      .then(this._returnResOK);
+    }
 
   }
