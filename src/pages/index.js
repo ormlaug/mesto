@@ -112,9 +112,9 @@ const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (data) => {
     })
 });
 
-const popupWithEditAvatarForm = new PopupWithForm('.popup_type_avatar', (data) => {
+const popupWithEditAvatarForm = new PopupWithForm('.popup_type_avatar', (item) => {
   popupWithEditAvatarForm.displayLoading(true, 'Сохранить', 'Cохранение...')
-  api.editAvatar(data)
+  api.editAvatar(item.avatar)
     .then((res) => {
       user.setUserInfo(res);
       popupWithEditAvatarForm.close();
