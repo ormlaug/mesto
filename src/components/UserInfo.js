@@ -9,13 +9,15 @@ export default class UserInfo {
       const userData = {
         name: this._name.textContent,
         about: this._job.textContent,
+        avatar: this._avatar
       };
       return userData;
     }
   
     setUserInfo(data) {
+      console.log({data})
       this._name.textContent = data.name;
       this._job.textContent = data.about;
-      this._avatar.style.backgroundImage = `url(${link})`;
+      this._avatar.style.backgroundImage = data.avatar;
     }
   }
