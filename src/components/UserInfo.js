@@ -18,6 +18,6 @@ export default class UserInfo {
       console.log({data})
       this._name.textContent = data.name;
       this._job.textContent = data.about;
-      this._avatar.style.backgroundImage = data.avatar;
+      this._avatar.style.backgroundImage = `url(${data.avatar})`;
     }
   }
