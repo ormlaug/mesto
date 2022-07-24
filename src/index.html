@@ -14,9 +14,7 @@
   </header>
 
   <section class="profile">
-    <div class="profile__avatar-wrapper">
-      <img src="./images/avatar.jpg" tabindex="1" class="profile__avatar">
-    </div>
+    <div class="profile__avatar"></div>
     <div class="profile__info">
       <h1 class="profile__name">Жак-Ив Кусто</h1>
       <button type="button" class="profile__edit-button" aria-label="edit"></button>
@@ -114,7 +112,7 @@
   </div>
 
   <div class="popup popup_type_avatar">
-    <div class="popup__container">
+    <div class="popup__container popup__container_for-avatar">
       <button type="button" class="popup__close" aria-label="close"></button>
       <form class="form" name="form" action="#" novalidate>
         <h2 class="form__heading">Обновить аватар</h2>
@@ -135,7 +133,7 @@
   </div>
 
   <div class="popup popup_type_delete">
-    <div class="popup__container">
+    <div class="popup__container popup__container_for-removing">
       <button type="button" class="popup__close" aria-label="close"></button>
       <form class="form" name="form" action="#" novalidate>
         <h2 class="form__heading">Вы уверены?</h2>

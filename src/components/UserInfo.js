@@ -10,7 +10,6 @@ export default class UserInfo {
       const userData = {
         name: this._name.textContent,
         about: this._job.textContent,
-        avatar: this._avatar.src
       };
   
       return userData;
@@ -19,6 +18,9 @@ export default class UserInfo {
     setUserInfo(data) {
       this._name.textContent = data.name;
       this._job.textContent = data.about;
-      this._avatar.src = data.avatar;
+    }
+
+    setUserAvatar(link) {
+      this._avatar.style.backgroundImage = `url(${link})`;
     }
   }

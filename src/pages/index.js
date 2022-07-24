@@ -122,9 +122,9 @@ const popupWithEditInfoForm = new PopupWithForm('.popup_type_edit', (data) => {
 
 const popupWithEditAvatarForm = new PopupWithForm('.popup_type_avatar', (data) => {
   popupWithEditAvatarForm.displayLoading(true, 'Сохранить', 'Cохранение...')
-  api.editAvatar(data)
+  api.editAvatar(link)
     .then((res) => {
-      user.setUserInfo(res);
+      user.setUserAvatar(res);
       popupWithEditAvatarForm.close();
     })
     .catch((err) => console.log(err))
@@ -145,7 +145,7 @@ infoEditButton.addEventListener('click', function() {
   popupWithEditInfoForm.open();
 });
 
-avatarEditButton.addEventListener('cklick', function() {
+avatarEditButton.addEventListener('click', function() {
   popupWithEditAvatarForm.open();
   avatarFormValidator.disableSubmitButton(config.submitButtonSelector);
 })
