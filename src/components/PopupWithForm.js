@@ -11,7 +11,7 @@ export default class PopupWithForm extends Popup {
   }
 
   displayLoading(loading, initialTextContent, loadingTextContent) {
-      if (loading) {
+      if (!loading) {
         this._submitButton.textContent = initialTextContent;
       } else {
         this._submitButton.textContent = loadingTextContent;
